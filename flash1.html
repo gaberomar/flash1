@@ -1,0 +1,83 @@
+﻿
+
+<script>
+function getParam ( sname )
+{
+  var params = location.search.substr(location.search.indexOf("?")+1);
+  var sval =  params.replace("sv=", "");
+  
+  return sval;
+}
+var sv = getParam("sv");
+
+</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Apple HLS</title>
+    <style>
+      /* This CSS is required to avoid layout issues */
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+      </head>
+  <body>
+<!-- Include  Media Player - here we use the optimised build for Shaka player -->
+<script src="https://cdn.radiantmediatechs.com/rmp/5.9.2/js/rmp-shaka.min.js"></script>
+<!-- Player container element -->
+<div id="rmpPlayer"></div>
+<!-- Set up player configuration options -->
+
+<script>
+var src = {
+dash: sv,};
+
+var settings = {
+  licenseKey: 'Y2thYWdnY2NvcyEqXyVhZW89M2VrY3NrdjI3OT9yb201ZGFzaXMzMGRiMEElXyo=',
+
+   // Here are our iframe settings
+        iframeMode: true,
+        iframeAllowed: true,
+        sharing: true,
+
+        skin: 's1',
+        src: src,
+         // Enables picture-in-picture module
+    pip: true,
+        poster: '',
+        // Logo settings
+  logo: '-',
+  logoLoc: 'https://www.kora-online.tv',
+  logoPosition: 'bottom',
+  logoWatermark: 'false',
+   // Relevant low-latency settings
+  isLive: true,
+  // We set a 12 seconds buffer target (playlist chunk count x chunk duration)
+  hlsJSMaxBufferLength: 12,
+  // We set hlsJSLiveSyncDuration to the minimal possible duration (3 x chunk duration)
+  hlsJSLiveSyncDuration: 3,
+
+  // Our Google Analytics settings
+    gaTrackingId: 'UA-151667901-1',
+    gaCategory: 'E-learning video',
+    gaLabel: 'How to start with HTML5 video',
+    gaEvents: ['context', 'ready', 'playerstart', 'error', 'adimpression', 'adloadererror', 'aderror']
+      };
+      var elementID = 'rmpPlayer';
+      var rmp = new RadiantMP(elementID);
+      rmp.init(settings);
+    </script>
+
+
+</body>
+</html>
+
